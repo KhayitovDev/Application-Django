@@ -1,0 +1,28 @@
+{% for post in posts %}
+<div class="roomListRoom">
+    <div class="roomListRoom__header">
+        <a href="#" class="roomListRoom__author">
+            <span>{{post.author.username}}</span>
+        </a>
+       
+        <div class="roomListRoom__actions">
+            <span>{{post.created_at|date:"F d, Y"}}</span>
+        </div>
+    </div>
+    <div class="roomListRoom__content">
+        <a href="{% url 'detail' post.pk %}">{{post.title|truncatewords:30}}</a>
+    </div>
+    <a href="" class="roomListRoom__author">
+        <span>Category: {{post.category.title}}</span>
+    </a>
+    <div class="roomListRoom__meta">
+        <a href="{% url 'detail' post.pk %}"><p class="roomListRoom__topic">Read more...</p></a>
+        {% if request.user.is_authenticated and request.user.id == post.author.id %}
+        <a href="{% url 'update' post.pk %}">
+            <p class="roomListRoom__topic">Update</p>
+        </a>
+        {% endif %}
+    </div>
+  
+</div>
+{% endfor %}

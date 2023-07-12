@@ -1,0 +1,25 @@
+<div class="flex justify-center items-center mt-8">
+    <nav class="inline-flex rounded-md shadow">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}"
+            class="px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-l-md">
+            Previous
+        </a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <a href="?page={{ num }}" class="px-3 py-2 bg-blue-500 text-white hover:bg-blue-600">{{ num }}</a>
+        {% else %}
+        <a href="?page={{ num }}" class="px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300">{{ num }}</a>
+        {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}"
+            class="px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-r-md">
+            Next
+        </a>
+        {% endif %}
+    </nav>
+</div>

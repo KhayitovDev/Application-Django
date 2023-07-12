@@ -1,0 +1,36 @@
+{% for post in draft_posts %}
+<div class="roomListRoom">
+    <div class="roomListRoom__header">
+        <a href="#" class="roomListRoom__author">
+            <span>{{post.author.username}}</span>
+        </a>
+
+        <div class="roomListRoom__actions">
+            <span>{{post.created_at|date:"F d, Y"}}</span>
+        </div>
+    </div>
+    <div class="roomListRoom__content">
+        <a href="{% url 'draft_detail' post.pk %}">{{post.title|truncatewords:30}}</a>
+    </div>
+    <a href="" class="roomListRoom__author">
+        <span>Category: {{post.category.title}}</span>
+    </a>
+    <div class="roomListRoom__meta">
+        <a href="{% url 'draft_detail' post.pk %}">
+            <p class="roomListRoom__topic">Read more...</p>
+        </a>
+        
+       
+        <a href="{% url 'delete' post.pk %}">
+            <p class="roomListRoom__topic">Delete</p>
+        </a>
+
+    </div>
+   
+
+</div>
+<br>
+<a href="{% url 'home_page' %}">
+    <p class="roomListRoom__topic">Back to Posts</p>
+</a>
+{% endfor %}

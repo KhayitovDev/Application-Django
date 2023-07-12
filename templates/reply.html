@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="create-room layout">
+    <div class="container">
+        <div class="layout__box">
+            <div class="layout__body">
+                <form class="form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <div class="form__group">
+                        <label for="room_description">Post Description</label>
+                        {{form.body}}
+                    </div>
+                    <div class="form__action">
+                        <a class="btn btn--dark" href="{% url 'home_page' %}">Cancel</a>
+                        <button class="btn btn--main" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}

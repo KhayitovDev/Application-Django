@@ -1,0 +1,24 @@
+<div class="activities">
+  
+    {% if request.user.is_authenticated %}
+        <div class="activities__header">
+            <h2>Activities</h2>
+        </div>
+    <div class="activities__box">
+        <div class="activities__boxHeader roomListRoom__header">
+            <a href="{% url 'draft_posts' %}" class="roomListRoom__author">
+    
+                <h3>
+                    <span>My Drafts</span>
+                </h3>
+            </a>
+        </div>
+        <br>
+
+
+            {% endif %}
+
+    
+
+</div>
+</div>

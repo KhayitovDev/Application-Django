@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="layout layout--3">
+    <div class="container">
+
+        <!-- Topics Start -->
+        {% include "category.html" %}
+        <!-- Topics End -->
+
+        <!-- Room List Start -->
+        <div class="container">
+            <div class="activities__header">
+                <h2>Comments</h2>
+            </div>
+            <br>
+            {% if comments %}
+            {% for comment in comments %}
+            <div class="activities__box">
+                <div class="activities__boxHeader roomListRoom__header">
+                    <a href="#" class="roomListRoom__author">
+                        <div class="avatar avatar--small">
+                            <img
+                                src="https://w7.pngwing.com/pngs/6/367/png-transparent-comment-dots-regular-icon.png" />
+                        </div>
+                        <p>
+                            @{{ comment.name }}
+                            <span>{{ comment.created_at|timesince }} ago</span>
+                        </p>
+                    </a>
+                </div>
+
+                <div class="activities__boxContent">
+                    <p>commented on ”<a href="">{{ comment.post }}</a>”</p>
+                    <div class="activities__boxRoomContent">{{ comment.body }}</div>
+                  
+                </div>
+
+                <div class="roomListRoom__meta">
+                    <a href="{% url 'reply_to_comment' comment.pk %}">
+                        <p class="roomListRoom__topic">Reply</p>
+                    </a>
+                </div>
+                <br>
+
+                <!-- replies content start -->
+
+                {% for reply in comment.replies.all %}
+                <div class="activities__boxHeader roomListRoom__header">
+                    <a href="#" class="roomListRoom__author">
+                        <div class="avatar avatar--small">
+                            <img src="https://w7.pngwing.com/pngs/6/367/png-transparent-comment-dots-regular-icon.png" />
+                        </div>
+                        <p>
+                                replied by @{{reply.replied_to}}
+                                <span>{{ reply.created_at|timesince }} ago</span>
+                        </p>
+                    </a>
+                </div>
+                <div class="activities__boxContent">
+                    <span>{{ reply.body }}</span>
+                </div>
+                <br>
+
+                {% empty %}
+                <p>No replies yet.</p>
+                {% endfor %}
+
+
+            </div>
+            {% endfor %}
+
+            {% else %}
+            <div class="roomListRoom">
+                <div class="roomListRoom__content">
+                    <h2>No comments yet!</h2>
+                </div>
+                <br>
+            </div>
+            {% endif %}
+
+            <div class="roomListRoom__meta">
+                <a href="{{request.META.HTTP_REFERER}}">
+                    <p class="roomListRoom__topic">Back to Posts</p>
+                   
+                </a>
+            </div>
+        </div>
+        <!-- Room List End -->
+
+        <!-- Activities Start -->
+        {% include "activity.html" %}
+        <!-- Activities End -->
+    </div>
+</main>
+
+{% endblock content %}
